@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
   const [data, setData] = useState([]);
   const [ranLet, setRanLet] = useState(randomLetter());
   const [ranNum, setRanNum] = useState({ index: 0, message: 0 });
-  const key = "ACA VA LA KEY DE https://api-ninjas.com/"; 
+  const key = "sMTvhIU/H+bqDXK4AZSL0Q==FADjoERg5xAChgBd";
 
   useEffect(() => {
     fetch(`https://api.api-ninjas.com/v1/cats?name=${ranLet}`, {
@@ -33,6 +31,9 @@ function App() {
             Math.random() * 2
           ) /* para que me elija uno de 2 mensajes, el origen del gato o cuanto miden*/,
         });
+        if(data.length < 1){
+          console.log('Re-generating...')
+          setRanLet(randomLetter())}
         setData(data);
       })
       .catch((error) => {
@@ -51,7 +52,6 @@ function App() {
     setRanLet(randomLetter());
   }
 
-  console.log(data);
   return (
     <div>
       {data.length > 0 ? ( /* checkea que data no este vacio */
@@ -72,7 +72,16 @@ function App() {
         </div>
       ) : (
         /* si data esta vacia lo mas probable es que este cargando la api asi que -> */
-        <p>Loading some cats...</p>
+        <div className="card-container">
+          <p className="card-fact">
+            Loading...
+          </p>
+          <img className="card-image"></img>
+          {/* Cada que se clickea el boton ranLet cambia*/}
+          <button onClick={handleOnClick} className="btn-fact">
+            Next Fact
+          </button>
+        </div>
       )}
     </div>
   );
