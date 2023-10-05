@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
+/*Me di cuenta despues de subirlo que no todas las letras tienen gatos en la api asi que hice cambios para que no se rompa en esos casos*/
+
 function App() {
   const [data, setData] = useState([]);
   const [ranLet, setRanLet] = useState(randomLetter());
